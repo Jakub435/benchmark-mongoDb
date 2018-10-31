@@ -40,6 +40,9 @@ public class MongoService {
 
     public void clear(){
         mongoRepo.deleteAll();
+        mongoPolygonRepo.deleteAll();
+        mongoLineStringRepo.deleteAll();
+        mongoMultiPointRepo.deleteAll();
     }
 
     public String checkIfExistAndReturnNewName(String name){

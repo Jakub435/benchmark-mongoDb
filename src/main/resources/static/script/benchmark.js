@@ -104,6 +104,7 @@ function drawChart() {
     receiveChartData = new google.visualization.DataTable();
     setUpColums(sendChartData);
     setUpColums(receiveChartData);
+    receiveChartData.addColumn('number','BasicObjMultiPoint');
     
     data.addColumn('string', 'punkty');
     data.addColumn('number', 'MultiPoint');
@@ -245,10 +246,18 @@ function sendCoordinateAndDisplayTimeOfSave(shapeLatLng, numberOfPoint, shapeNam
 }
 
 function prepareDataForDisplay(saveTime, numberOfPoint){
+    if(saveTime.basicObjectMultiPoint != undefined){
+        return [numberOfPoint.toString(),
+            saveTime.mongoSpatialMultiPoint,
+            saveTime.mongoSpatialLineString,
+            saveTime.mongoSpatialPolygon,
+            saveTime.basicObjectMultiPoint];
+    }
     return [numberOfPoint.toString(),
         saveTime.mongoSpatialMultiPoint,
         saveTime.mongoSpatialLineString,
         saveTime.mongoSpatialPolygon];
+
 }
 
 function displayOnSendChart(row){
