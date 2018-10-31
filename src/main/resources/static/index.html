@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head> 
+    <title>Benchmark</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="script/benchmark.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-ZWMMhp8fkyzMMpw8m0erkNmd5LRW7i4&libraries=drawing&callback=initMap"
+			async defer></script>
+
+
+	<link rel="stylesheet" type="text/css" href="style/benchmark.css">
+</head>
+<body>
+	<div id="map"></div>
+	<div id="chart"></div>
+	<div class="clearFloat"></div>
+	<div>
+		<button id="delete-button">Wyczyść mapę</button>
+		<button id="disp-send-result">pokaż czas wysłania</button>
+        <button id="disp-receive-result">pokaż czas pobrania</button>
+		<br>
+		<br>
+        <div id="input-alert">wprowadź nazwę kształtu:</div>
+        <input type="text" id="shape-name">
+		<button id="save-coordinate-button">Zapisz zaznaczoną krzywą</button>
+		<br>
+		<select id="selected-coordinate">
+		</select> 
+		<button id="get-coordinate-button">Pobierz wybraną krzywą</button>
+		<br>
+		<div>Wprowadź ilość współrzędnych:</div>
+		<input type="number" id="generate_value">
+		<button id="generate">generuj i wyślij współrzędne</button>
+
+	</div>
+</body>
+</html>

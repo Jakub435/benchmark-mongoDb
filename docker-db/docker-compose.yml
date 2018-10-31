@@ -1,0 +1,34 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+    mongodb:
+        image: 'bitnami/mongodb:latest'
+        ports:
+            - "27017:27017"
+    mysql:
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: "bench"
+            MYSQL_ROOT_PASSWORD: "pass"
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    postgis:
+         image: 'mdillon/postgis'
+         restart: always
+         ports:
+         - "5432:5432"
+         environment:
+            POSTGRES_PASSWORD: pass
+            POSTGRES_USER: user
+            POSTGRES_DB: bench
+    neo4j:
+        build: 
+            context: ./neo4j
+            dockerfile: Dockerfile.yml
+        ports:
+            - "7474:7474"
+            - "7687:7687"

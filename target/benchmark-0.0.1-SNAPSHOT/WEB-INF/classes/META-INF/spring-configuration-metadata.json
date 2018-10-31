@@ -1,0 +1,18 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.benchmark.configuration.MysqlConfig",
+      "name": "spring.mysql.datasource",
+      "sourceMethod": "mysqlDataSource()",
+      "type": "javax.sql.DataSource"
+    },
+    {
+      "sourceType": "com.benchmark.configuration.PostgresqlConfig",
+      "name": "spring.postgresql.datasource",
+      "sourceMethod": "postgresqlDataSource()",
+      "type": "javax.sql.DataSource"
+    }
+  ],
+  "properties": []
+}

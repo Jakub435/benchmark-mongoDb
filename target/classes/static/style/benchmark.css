@@ -1,0 +1,28 @@
+html, body{
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+.clearFloat{
+	float:right
+}
+
+#map{
+	height: 500px;
+	width: 45%;
+	float: left;
+}
+
+#chart{
+	height: 500px;
+	width: 55%;
+	float: left;
+	overflow-y:unset;
+}
+
+#selected-coordinate, #shape-name{
+	height: 20px;
+	width: 150px;
+}
