@@ -1,0 +1,80 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit{
+  myControl = new FormControl();
+  options: string[] = [];
+  filteredOptions: Observable<string[]>;
+  showButton: boolean = true;
+
+  constructor(private http: HttpClient){
+  }
+
+  ngOnInit() {
+    this.setValueChangeListener();
+  }
+
+  private setValueChangeListener(){
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map((value: string) => {
+            if(value.length == 4){
+               this.getDataFromServer(value);
+            }
+            return this.getFilteredOptions(value);
+          })
+      );
+  }
+
+  private getFilteredOptions(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  private getDataFromServer(value: string){
+    this.http.get("http://www.mocky.io/v2/5cab9b533000007200103193")
+    .subscribe((res:string[])=>{
+      this.options = res;
+      this.setValueChangeListener();
+    });
+  }
+}
+
+
+
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatButtonModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    HttpClientModule
+  ],
+  
+  <form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input #trigger="matAutocompleteTrigger" type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+      <button mat-raised-button *ngIf="showButton">ALL</button>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
